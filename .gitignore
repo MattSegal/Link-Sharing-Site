@@ -9,3 +9,9 @@ node_modules
 Thumbs.db
 .cache/
 sql/
+*.sqlite3
+webpack-stats.json
+env/
+npm-debug.log.*
+.tmp/
+assets/
