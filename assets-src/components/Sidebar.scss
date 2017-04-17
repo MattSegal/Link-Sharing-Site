@@ -1,0 +1,41 @@
+@import '../scss/constants';
+
+:local 
+{
+  .sidebarWrapper 
+  {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .sidebarSpacer {
+    width: 180px;
+  }
+
+  .sidebar 
+  {
+    height: 100%;
+    //background-color: $light-grey;
+    position: fixed;
+    flex: 0 0 140px;
+    padding: 1em;
+
+  }
+
+  .item 
+  {
+    overflow: hidden;
+    margin-bottom: 1.5em; 
+    line-height: 2em;
+    user-select: none;
+    &:hover
+    {
+      cursor: pointer;
+    }
+  }
+
+  .selectedItem {
+    @extend .item;
+    font-weight: bold;
+  }
+}

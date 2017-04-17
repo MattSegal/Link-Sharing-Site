@@ -2,6 +2,14 @@
 
 :local
 {
+    .hiddenOnMobile 
+    {
+        @media (max-height: 750px) and (max-width: 600px)
+        {
+            display: none;
+        }
+    }
+
     .field
     {  
         margin-bottom: 2em; 
@@ -64,6 +72,10 @@
     {
         margin: 2em auto 0 auto;
         max-width: 800px;
+
+        @media (max-height: 800px) {
+            margin: 0.5em auto 0 auto;
+        }
     }
 
     .input
@@ -77,6 +89,10 @@
             padding: 0.5em;
             width: 100%;
             resize: none;
+        }
+
+        @media (max-height: 800px) {
+            margin-bottom: 0.5em;
         }
     }
 }

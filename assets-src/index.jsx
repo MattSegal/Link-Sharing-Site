@@ -36,9 +36,7 @@ ReactDOM.render(
       <div>
         <HeaderContainer/>
         <div className="headerSpacer" />
-        <div className="contentWrapper">
-          <Content/>
-        </div>
+        <Content/>
       </div>
     </BrowserRouter>
   </Provider>, 

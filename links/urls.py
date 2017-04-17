@@ -18,5 +18,5 @@ urlpatterns = [
     url(r'^menu/$',views.index),
     url(r'^link/',views.index),
     url(r'^add/$',views.index),
-
+    url(r'^user/',views.index),
 ]

@@ -4,6 +4,7 @@ def jenkinsEnvVars = Jenkins.instance.getGlobalNodeProperties()[0].getEnvVars()
 
 env.ENVIRONMENT_TYPE = jenkinsEnvVars.ENVIRONMENT_TYPE ?: 'TEST' // TEST or PROD
 env.TARGET_NODE_ADDRESS = jenkinsEnvVars.TARGET_NODE_ADDRESS ?: '45.55.161.12'
+env.DOMAIN_NAME = 'mattslinks.xyz'
 env.APP_NAME = 'links'
 
 def unwanted_files = [
@@ -139,10 +140,10 @@ stage('Deploy')
     clone_or_pull('/srv/salt', 'https://github.com/MattSegal/WebserverSalt.git')
 
     echo 'Testing SaltStack connections'
-    sh 'sudo salt "*" test.ping'
+    sh 'sudo salt "links.localdomain" test.ping'
 
     echo 'Applying latest SaltStack config'
-    sh 'sudo salt "*" state.highstate  -l debug'
+    sh 'sudo salt "links.localdomain" state.highstate  -l debug'
 
     sshagent(['jenkins']) 
     {
@@ -166,7 +167,7 @@ stage('Deploy')
         |cat > ${VIRTUALENV_DIR}/bin/set_env_vars << EOM
         |export DEPLOY_STATUS='${ENVIRONMENT_TYPE}'
         |export DJANGO_STATIC_ROOT='/var/static'
-        |export ALLOWED_HOSTS='${TARGET_NODE_ADDRESS}'
+        |export ALLOWED_HOSTS='${TARGET_NODE_ADDRESS},${DOMAIN_NAME},www.${DOMAIN_NAME}'
         |EOM
         |
         |chmod +x ${VIRTUALENV_DIR}/bin/set_env_vars
@@ -203,7 +204,7 @@ stage('Deploy')
         
         // Start gunicorn + Django
         ssh("${VIRTUALENV_DIR}/bin/gunicorn_start deploy", [
-            ALLOWED_HOSTS: TARGET_NODE_ADDRESS,
+            ALLOWED_HOSTS: "${TARGET_NODE_ADDRESS},${DOMAIN_NAME},www.${DOMAIN_NAME}",
             APP_NAME: APP_NAME,
             DJANGODIR: DEPLOY_DIR,
             LOGFILE: "${VIRTUALENV_DIR}/gunicorn.log",

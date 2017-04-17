@@ -1,11 +1,10 @@
 import React, {PropTypes, Component} from 'react';
-import style from 'components/UserList.scss'
+import style from 'components/Sidebar.scss'
 
 const User = props => 
 {
-    let username = props.username.charAt(0).toUpperCase() + props.username.slice(1);
-    let userStyle = style.user
-    userStyle += props.isActive ? ' '+style.selected : ''
+    const username = props.username.charAt(0).toUpperCase() + props.username.slice(1);
+    const userStyle = style.user + (props.isActive ? ' ' + style.selected : '')
     return (
         <li 
             onClick={() => props.onUserClick(props.id)} 

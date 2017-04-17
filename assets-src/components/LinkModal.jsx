@@ -65,8 +65,8 @@ class LinkModal extends Component
       )
     }
 
-    return (
-      <Modal closeRoute="/">
+    const linkDisplay = isEdit => (
+      <div className={isEdit && style.hiddenOnMobile}>
         <div className={style.field}>
           <a className={style.hyperlink} href={this.state.url} target="_blank" rel="noopener noreferrer">
             <strong>{this.state.title}</strong>
@@ -76,31 +76,46 @@ class LinkModal extends Component
           </p>
         </div>
         <div className={style.description}>{this.state.description}</div>
-        {isLinkOwner && (
-          <Switch>
-            <Route path={`/link/${link.id}/edit`}>
-              <LinkForm 
-                action={this.submitEditLink}
-                state={this.state}
-                setState={(obj) => this.setState(obj)}
-                backToURL={`/link/${link.id}`}
-              />
-            </Route>
-            <Route path={`/link/${link.id}/delete`}>
-              <div className={style.btnWrapper}>
-                <Link to="/">
-                  <button className={style.btn} onClick={()=>deleteLink(link.id)}>
-                    <FaTrashO />&nbsp;Delete
-                  </button>
-                </Link>
-                <Link to={`/link/${link.id}`}>
-                  <button className={style.btn}><FaClose />&nbsp;Cancel</button>
-                </Link>
-              </div>
-            </Route>
-            <Route path={`/link/${link.id}`} >
-              <div>
-                {!link.updating && (
+      </div>
+    )
+
+    return (
+      <Modal closeRoute="/">
+        <Switch>
+          <Route path={`/link/${link.id}/edit`}>
+            <div>
+              {linkDisplay(true)}
+              {isLinkOwner && 
+                <LinkForm 
+                  action={this.submitEditLink}
+                  state={this.state}
+                  setState={(obj) => this.setState(obj)}
+                  backToURL={`/link/${link.id}`}
+                />
+              }
+            </div>
+          </Route>
+          <Route path={`/link/${link.id}/delete`}>
+            <div>
+              {linkDisplay(false)}
+              {isLinkOwner && 
+                <div className={style.btnWrapper}>
+                  <Link to="/">
+                    <button className={style.btn} onClick={()=>deleteLink(link.id)}>
+                      <FaTrashO />&nbsp;Delete
+                    </button>
+                  </Link>
+                  <Link to={`/link/${link.id}`}>
+                    <button className={style.btn}><FaClose />&nbsp;Cancel</button>
+                  </Link>
+                </div>
+              }
+            </div>
+          </Route>
+          <Route path={`/link/${link.id}`} >
+            <div>
+              {linkDisplay(false)}
+              {isLinkOwner && !link.updating && (
                   <div className={style.btnWrapper}>
                     <Link to={`/link/${link.id}/edit`}>
                       <button className={style.btn}><FaPencil />&nbsp;Edit</button>
@@ -109,16 +124,15 @@ class LinkModal extends Component
                       <button className={style.btn}><FaTrashO />&nbsp;Delete</button>
                     </Link>
                   </div>
-                )}
-                {link.updating && 
-                  <div className={style.spinnerWrapper}>
-                    <Spinner className={style.spinner}/>
-                  </div>
-                }
-              </div>
-            </Route>
-          </Switch>
-        )}
+              )}
+              {isLinkOwner && link.updating && 
+                <div className={style.spinnerWrapper}>
+                  <Spinner className={style.spinner}/>
+                </div>
+              }
+            </div>
+          </Route>
+        </Switch>
       </Modal>
     )
   }
