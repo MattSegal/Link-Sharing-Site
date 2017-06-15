@@ -14,3 +14,7 @@ requests==2.13.0
 six==1.10.0
 freezegun==0.3.8
 django-cors-headers==2.0.2
+gevent==1.2.1
+greenlet==0.4.12
+grequests==0.3.0
+redis==2.10.5

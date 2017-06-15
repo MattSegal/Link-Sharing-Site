@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router-dom'
 
 import LinkListContainer from 'containers/LinkListContainer'
 import BookmarkListContainer from 'containers/BookmarkListContainer'
+import RedditFeedContainer from 'containers/RedditFeedContainer'
 import LinkModalContainer from 'containers/LinkModalContainer'
 import AddLinkModalContainer from 'containers/AddLinkModalContainer'
 
@@ -18,6 +19,9 @@ export default class Content extends Component
       <Switch>
         <Route path="/bookmarks">
           <BookmarkListContainer />
+        </Route>
+        <Route path="/reddit">
+          <RedditFeedContainer />
         </Route>
         <Route path="/">
           <div>

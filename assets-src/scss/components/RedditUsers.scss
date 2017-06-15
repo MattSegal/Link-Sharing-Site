@@ -1,0 +1,25 @@
+@import '../constants';
+
+:local {
+    .panel {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    .panelTitle {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .download {
+        display: inline-block;
+        vertical-align: bottom;
+        font-size: 1.5em;
+        height: 1.2em;
+        width: 1.2em;
+        cursor: pointer;
+        position: relative;
+    }
+}

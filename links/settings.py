@@ -16,6 +16,7 @@ IS_TEST = os.environ.get('DEPLOY_STATUS') == 'TEST'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APPS_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'apps'))
 
 LOGIN_REDIRECT_URL = '/' 
 
@@ -47,6 +48,7 @@ WEBPACK_LOADER = {
 INSTALLED_APPS = [
     # Links
     'api.apps.ApiConfig',
+    'reddit.apps.RedditConfig',
     # Third Party
     'rest_framework',   # REST API
     'webpack_loader',   # Webpack bundling
@@ -121,6 +123,8 @@ postgres_db = {
 }
 
 DATABASES = postgres_db if (IS_PROD or IS_TEST) else sqlite_db
+
+REDIS_HOST='127.0.0.1'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

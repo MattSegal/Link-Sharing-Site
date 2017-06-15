@@ -4,7 +4,7 @@ import FaPencil from 'react-icons/lib/fa/pencil'
 import FaClose from 'react-icons/lib/fa/close'
 
 // Wrong style
-import style from 'components/LinkModal.scss'
+import style from 'scss/components/LinkModal.scss'
 
 
 export default class LinkForm extends Component 

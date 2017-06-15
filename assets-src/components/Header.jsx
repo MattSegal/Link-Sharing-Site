@@ -5,7 +5,7 @@ import FaBars from 'react-icons/lib/fa/bars'
 import FaPlus from 'react-icons/lib/fa/plus'
 import FaRefresh from 'react-icons/lib/fa/refresh'
 import Spinner from 'components/Spinner'
-import style from 'components/Header.scss'
+import style from 'scss/components/Header.scss'
 
 export default class Header extends Component {
   static propTypes ={
@@ -27,8 +27,11 @@ export default class Header extends Component {
               className={style.btn}
             />
             <Switch>
-            <Route path="/bookmarks">
-              <Link to="/"><h1>Bookmarks</h1></Link>
+              <Route path="/bookmarks">
+                <Link to="/"><h1>Bookmarks</h1></Link>
+              </Route>
+              <Route path="/reddit">
+                <Link to="/"><h1>Reddit Feed</h1></Link>
               </Route>
               <Route path="/">
                 <Link to="/"><h1>{username ? username : 'Links'}</h1></Link>

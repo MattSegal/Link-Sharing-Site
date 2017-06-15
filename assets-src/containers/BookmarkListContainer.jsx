@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import HyperLink from 'components/HyperLink'
-import style from 'components/LinkList.scss'
-import linkStyle from 'components/Link.scss'
+import style from 'scss/components/LinkList.scss'
+import linkStyle from 'scss/components/HyperLink.scss'
 import FaBookmarkO from 'react-icons/lib/fa/bookmark-o'
 import FaBookmark from 'react-icons/lib/fa/bookmark'
 import Actions from 'actions'

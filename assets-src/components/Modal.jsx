@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import style from './Modal.scss'
+import style from 'scss/components/Modal.scss'
 import FaClose from 'react-icons/lib/fa/close'
 import {Link} from 'react-router-dom'
 

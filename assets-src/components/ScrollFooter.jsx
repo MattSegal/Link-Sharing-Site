@@ -1,5 +1,5 @@
 import React, {PropTypes, PureComponent} from 'react';
-import style from 'components/ScrollFooter.scss'
+import style from 'scss/components/ScrollFooter.scss'
 import FaChevronUp from 'react-icons/lib/fa/chevron-up'
 require('smoothscroll-polyfill').polyfill(); // global side effect on window
 

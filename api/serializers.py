@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Link, Tag
+from reddit.serializers import RedditUserSerializer
 
 class UserSerializer(serializers.ModelSerializer):
+    reddit_users = RedditUserSerializer(many=True, read_only=True)
+
     class Meta:
         model = User
-        fields = ('id','username','bookmarks',)
+        fields = ('id','username','bookmarks', 'reddit_users')
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:

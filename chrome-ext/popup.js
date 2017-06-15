@@ -3,7 +3,7 @@ function sortByDate(link1, link2) {
 }
 
 function getLinks(callback, errorCallback) {
-  var searchUrl = 'http://mattslinks.xyz/api/link/'
+  var searchUrl = 'https://mattslinks.xyz/api/link/'
   var x = new XMLHttpRequest()
   x.open('GET', searchUrl);
   x.responseType = 'json'

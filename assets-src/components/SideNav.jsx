@@ -1,11 +1,12 @@
 import React, {PropTypes, PureComponent} from 'react';
-import style from 'components/SideNav.scss'
+import style from 'scss/components/SideNav.scss'
 import FaClose from 'react-icons/lib/fa/close'
 import FaUser from 'react-icons/lib/fa/user'
 import FaCog from 'react-icons/lib/fa/cog'
 import FaBook from 'react-icons/lib/fa/book'
 import FaTag from 'react-icons/lib/fa/tag'
 import FaChain from 'react-icons/lib/fa/chain'
+import FaRedditAlien from 'react-icons/lib/fa/reddit-alien'
 import {Link} from 'react-router-dom'
 import {NO_USER_SELECTED} from 'constants'
 
@@ -64,6 +65,11 @@ export default class SideNav extends PureComponent {
           {isUserLoggedIn &&   
             <Link to="/bookmarks" onClick={toggleSidebar} className={style.row}>
               <FaBook className={style.leftIcon}/>Bookmarks
+            </Link>
+          }
+          {isUserLoggedIn &&   
+            <Link to="/reddit" onClick={toggleSidebar} className={style.row}>
+              <FaRedditAlien className={style.leftIcon}/>Reddit Feed
             </Link>
           }
           <div className={style.parentRow}>

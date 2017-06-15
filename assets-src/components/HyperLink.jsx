@@ -1,5 +1,5 @@
 import React, {PropTypes, PureComponent} from 'react';
-import style from 'components/Link.scss'
+import style from 'scss/components/HyperLink.scss'
 import {getTimeSince} from 'utilities'
 import Spinner from 'components/Spinner'
 
@@ -9,7 +9,7 @@ export default class HyperLink extends PureComponent {
       title: PropTypes.string,
       url: PropTypes.string,
       username: PropTypes.string,
-      created: PropTypes.string,
+      created: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
       updating: PropTypes.bool,
     })
   }

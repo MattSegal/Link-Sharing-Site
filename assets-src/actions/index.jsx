@@ -11,6 +11,7 @@ import {fetchLinks} from './FetchLinks'
 import {bookmarkLink} from './BookmarkLink'
 import {toggleSidebar} from './ToggleSidebar'
 import {scrollLinksBottom} from './ScrollLinks'
+import {fetchRedditThreads} from './FetchRedditThreads'
 
 
 const setActiveUser = (user_id) => ({
@@ -28,4 +29,5 @@ module.exports = {
     bookmarkLink,
     toggleSidebar,
     scrollLinksBottom,
+    fetchRedditThreads,
 }

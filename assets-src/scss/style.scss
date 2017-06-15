@@ -1,4 +1,4 @@
-@import 'spinner';
+@import 'components/spinner';
 @import 'constants';
 
 // Hide scrollbars in Webkit browsers (Chrome + Safari)
@@ -18,11 +18,12 @@ a {
 
 .headerSpacer
 {
-    height: $header-height + 10px;
+    height: $header-height;
 }
 
 .contentWrapper
 {
+    position: relative;
     max-width: $content-max-width;
     margin: 0 auto;
     padding: 1em 2em;

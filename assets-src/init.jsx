@@ -16,6 +16,11 @@
             scrollCount: int
             sidebar: bool
         }
+
+        reddit {
+            threads: [thread]
+        }
+
         loggedInUser: user
     }
 
@@ -33,6 +38,25 @@
         id: int
         username: string
         bookmarks: [int]
+        reddit_users
+    }
+
+    thread {
+        reddit_id: string
+        is_self: bool
+        score: int
+        num_comments: int
+        comments: [comment]
+        created_utc: int
+        author: string
+        subreddit: string
+        permalink: string (relative url)
+        url: string (absolute url)
+        title: string
+    }
+
+    comment {
+        // more info here
     }
 */
 
@@ -58,7 +82,11 @@ const initialiseState = (state) => ({
     nav: {
         scrollCount: SCROLL_COUNT_INITIAL,
         sidebar: false,
-    }
+    },
+
+    reddit: {
+        threads: []  // No bootstrap data from reddit
+    },
 
 })
 
