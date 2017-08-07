@@ -9,13 +9,13 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm
+from django.views.generic.base import TemplateView
 
 import json
 
 def index(request):
     template = loader.get_template('links/index.html')
 
-    # TODO: Use view data to bootstrap data, as this is duplication
     users = User.objects.all().filter(is_superuser=False)
     links = Link.objects.all().filter(active=True)
 
@@ -46,7 +46,9 @@ def index(request):
 
 
 def login(request):
-    if request.method == 'POST':
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    elif request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             username = request.POST.get('username','').lower()
@@ -72,7 +74,9 @@ def logout(request):
     return HttpResponseRedirect('/')
 
 def signup(request):
-    if request.method == 'POST':
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    elif request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             username = request.POST['username'].lower()
@@ -106,3 +110,11 @@ def change_password(request):
     template = loader.get_template('links/change_password.html')
     context = {'form': form}
     return HttpResponse(template.render(context,request))
+
+
+class ServiceWorker(TemplateView):
+    template_name = 'links/sw.js'
+    content_type = 'application/javascript'
+
+class Offline(TemplateView):
+    template_name = 'links/offline.html'

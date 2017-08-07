@@ -50,3 +50,10 @@ ReactDOM.render(
   document.getElementById('react-app-root')
 )
 
+// Register the service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+  .then(registration => {
+    // it worked!
+  })
+}
