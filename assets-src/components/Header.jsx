@@ -23,6 +23,7 @@ export default class Header extends Component {
         <div className={style.headerContent}>
           <div className={style.group}>
             <FaBars 
+              id="qa-sidebar-btn"
               onClick={toggleSidebar}
               className={style.btn}
             />

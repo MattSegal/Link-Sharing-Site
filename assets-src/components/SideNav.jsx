@@ -51,9 +51,13 @@ export default class SideNav extends PureComponent {
     return (
       <div>
         <div onClick={toggleSidebar} className={`${style.sideNavBackground} ${active && style.active}`} />
-        <div className={`${style.sideNav} ${active && style.active}`}>
+        <div id="qa-sidebar" className={`${style.sideNav} ${active && style.active}`}>
           <div className={style.header}>
-            Links - {loggedInName}<FaClose onClick={toggleSidebar} className={style.rightIcon}/>
+            Links - {loggedInName}<FaClose 
+              id="qa-sidebar-close"
+              onClick={toggleSidebar} 
+              className={style.rightIcon}
+            />
           </div>
           <Link to="/"
             onClick={navigateLatest}
