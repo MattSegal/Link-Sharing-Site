@@ -27,6 +27,3 @@ if ($choice -eq "y") {
 } else {
     Write-Host "Aborting backup to $Server"
 }
-    
-
-
