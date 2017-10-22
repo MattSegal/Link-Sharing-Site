@@ -14,15 +14,16 @@ Deployment for Links
         + Start app server
 
 #>
-param([String]$Branch='dev')
-
-$userDir = pwd
-cd $PSScriptRoot
+param(
+    [Parameter(Mandatory=$true)]
+    [String]$Server,
+    [String]$Branch='dev'
+)
 
 # ========== BUILD PARAMETERS ==========
 # Local parameters
 $GIT_REPOSITORY = 'https://github.com/MattSegal/Link-Sharing-Site.git'
-$SERVER = 'mattslinks.xyz'
+$SERVER = $Server
 $APP_NAME = 'links'
 $BUILD_FOLDER = 'build'
 $ENVIRONMENT_TYPE = 'PROD'  # TEST or PROD
@@ -120,13 +121,15 @@ Write-Host "`nStopping app server"
 bash ./scripts/stop_app.sh $VIRTUALENV_DIR $APP_NAME $SERVER
 
 # Create and extract DB backups, the store in S3
-Write-Host "`nFetching database backups"
-bash ./scripts/get_db_backups.sh $APP_NAME $SERVER
-$backup =  Get-ChildItem | Where {$_.Name -like "postgres_*"}
-./env/Scripts/activate
-python ./scripts/backup_file.py $backup
-deactivate
-Remove-Item $backup
+if ($SERVER -eq 'mattslinks.xyz') {
+    Write-Host "`nFetching database backups"
+    bash ./scripts/get_db_backups.sh $APP_NAME $SERVER
+    $backup =  Get-ChildItem | Where {$_.Name -like "postgres_*"}
+    ./env/Scripts/activate
+    python ./scripts/backup_file.py upload --filename $backup
+    deactivate
+    Remove-Item $backup
+}
 
 # Do setup on server
 Write-Host "`nConfiguring app server"
@@ -136,4 +139,3 @@ bash ./scripts/setup_app.sh $DEPLOY_DIR $tmpDir $BUILD_FOLDER $SERVER
 Write-Host "`nStarting app server"
 bash ./scripts/start_app.sh $VIRTUALENV_DIR $APP_NAME $DEPLOY_DIR $ENVIRONMENT_TYPE $SERVER
 
-cd $userDir
