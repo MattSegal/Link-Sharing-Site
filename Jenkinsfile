@@ -2,16 +2,24 @@ pipeline {
     agent any
     stages {
         stage('Clone') {
-            sh 'echo "Clone"'
+            steps {
+                sh 'echo "Clone!"'
+            }
         }
         stage('Build') {
-            sh 'echo "Build"'
+            steps {
+                sh 'echo "Build"'
+            }
         }
         stage('Test') {
-            sh 'echo "Test"'
+            steps {
+                sh 'echo "Test"'
+            }
         }
         stage('Deploy') {
-            sh 'echo "Deploy"'
+            steps {
+                sh 'echo "Deploy"'
+            }
         }
     }
 }
