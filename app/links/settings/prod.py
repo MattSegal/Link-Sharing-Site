@@ -1,23 +1,13 @@
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 from . import *
 
 DEBUG = False
-USE_HTTPS = True
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-ALLOWED_HOSTS = [
-    'www.mattslinks.xyz',
-    'mattslinks.xyz',
-    '167.99.78.141',
-    '127.0.0.1',
-    'localhost',
-]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+ALLOWED_HOSTS = ["www.mattslinks.xyz", "mattslinks.xyz", "167.99.78.141", "127.0.0.1", "localhost"]
 
-# Logging
-LOGGING['root']['handlers'] = ['console', 'sentry']
-LOGGING['handlers']['sentry'] = {
-    'level': 'ERROR',
-    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-}
-
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('LINKS_RAVEN_DSN')
-}
+sentry_sdk.init(
+    dsn=os.environ.get("RAVEN_DSN"), integrations=[DjangoIntegration()], environment="prod"
+)

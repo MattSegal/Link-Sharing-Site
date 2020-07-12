@@ -14,89 +14,84 @@ from api.models import Link
 from api.serializers import LinkSerializer, LoggedInUserSerializer
 from .forms import ChangePasswordForm, LoginForm, SignupForm
 
-NO_ACTIVE_USER = -1   # constant for client-side JS - this sucks
+NO_ACTIVE_USER = -1  # constant for client-side JS - this sucks
 
 
 class IndexView(TemplateView):
-    template_name = 'links/index.html'
+    template_name = "links/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        links = Link.objects.filter(active=True).order_by('-created')[:settings.LINK_PAGE_SIZE]
+        links = Link.objects.filter(active=True).order_by("-created")[: settings.LINK_PAGE_SIZE]
         bootstrap_data = {
-            'links': {
-                'items': LinkSerializer(links, many=True).data,
-                'next': '/api/link/?page=2',  # yucky hack
+            "links": {
+                "items": LinkSerializer(links, many=True).data,
+                "next": "/api/link/?page=2",  # yucky hack
             }
         }
 
         if self.request.user.is_authenticated:
-            bootstrap_data['loggedInUser'] = LoggedInUserSerializer(self.request.user).data
+            bootstrap_data["loggedInUser"] = LoggedInUserSerializer(self.request.user).data
 
-        context['bootstrap_data'] = json.dumps(bootstrap_data)
+        context["title"] = "Links"
+        context["bootstrap_data"] = json.dumps(bootstrap_data)
         return context
 
 
 def login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('username', '').lower()
-            password = request.POST['password']
+            username = request.POST.get("username", "").lower()
+            password = request.POST["password"]
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect("/")
             else:
-                form.add_error(
-                    None,
-                    'Invalid username or password',
-                )
+                form.add_error(None, "Invalid username or password")
     else:
         form = LoginForm()
 
-    template = loader.get_template('links/login.html')
-    context = {'form': form}
+    template = loader.get_template("links/login.html")
+    context = {"form": form}
     return HttpResponse(template.render(context, request))
 
 
 def logout(request):
     auth_logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect("/")
 
 
 def signup(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
-            username = request.POST['username'].lower()
-            password = request.POST['password']
-            user = User.objects.create_user(
-                username=username,
-                password=password,
-            )
+            username = request.POST["username"].lower()
+            password = request.POST["password"]
+            user = User.objects.create_user(username=username, password=password)
             auth_login(request, user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect("/")
     else:
         form = SignupForm()
 
-    template = loader.get_template('links/signup.html')
-    context = {'form': form}
+    template = loader.get_template("links/signup.html")
+    context = {"form": form}
     return HttpResponse(template.render(context, request))
 
 
 @login_required(login_url="/change/")
 def change_password(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ChangePasswordForm(request.POST)
         if form.is_valid():
-            new_password = form.cleaned_data['password']
+            new_password = form.cleaned_data["password"]
             request.user.set_password(new_password)
             request.user.save()  # Django automatically logs you out
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect("/")
     else:
         form = ChangePasswordForm()
 
-    template = loader.get_template('links/change_password.html')
-    context = {'form': form}
+    template = loader.get_template("links/change_password.html")
+    context = {"form": form}
     return HttpResponse(template.render(context, request))

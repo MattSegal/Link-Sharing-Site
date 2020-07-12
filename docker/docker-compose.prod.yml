@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  web:
+    image: links:latest
+    entrypoint: /app/start-web.sh
+    ports:
+      - 8001:8001
+    environment:
+      - DJANGO_SETTINGS_MODULE=links.settings.prod
+      # Postgres
+      - PGDATABASE=links
+      - PGUSER=$LINKS_DB_USER
+      - PGPASSWORD=$LINKS_DB_PASSWORD
+      - PGHOST=$DOCKERHOST
+      - PGPORT=5432
+      # Pass-through
+      - RAVEN_DSN=$LINKS_RAVEN_DSN
+      - DJANGO_SECRET_KEY

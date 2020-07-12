@@ -1,0 +1,49 @@
+{
+  "name": "links",
+  "version": "1.0.0",
+  "description": "Build chain for links web app",
+  "author": "Matthew Segal",
+  "license": "ISC",
+  "scripts": {
+    "dev": "webpack --config webpack/webpack.dev.js",
+    "build": "webpack --config webpack/webpack.prod.js",
+    "lint": "prettier --list-different \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-styled-components": "^1.10.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-flowtype": "^3.12.1",
+    "eslint-plugin-react": "^7.14.3",
+    "flow-bin": "^0.98.1",
+    "prettier": "^1.15.2",
+    "terser-webpack-plugin": "^1.2.3",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "camelize": "^1.0.0",
+    "js-cookie": "^2.2.1",
+    "moment": "^2.22.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.4.0",
+    "react-redux": "^7.0.0",
+    "react-router-dom": "^5.1.2",
+    "react-waypoint": "^9.0.3",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0"
+  }
+}

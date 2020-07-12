@@ -1,22 +1,17 @@
-appdirs==1.4.0
-Django==1.10.5
-django-webpack-loader==0.4.1
-djangorestframework==3.5.3
-factory-boy==2.8.1
-Faker==0.7.8
-gunicorn==19.7.0
-ipaddress==1.0.18
-packaging==16.8
-psycopg2==2.7.1
-pyparsing==2.1.10
-python-dateutil==2.6.0
-requests==2.13.0
-six==1.10.0
-freezegun==0.3.8
-django-cors-headers==2.0.2
-flake8
-isort
-boto3
+# Backend
+Django
+
+# Infra
+psycopg2-binary
+gunicorn
+sentry-sdk
+
+# API
+djangorestframework
+
+# Static files
 whitenoise
+
+# Admin
+django-extensions
 ipython
-raven
