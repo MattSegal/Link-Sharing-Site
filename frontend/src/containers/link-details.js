@@ -5,7 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 
 import { actions } from 'state'
-import { Spinner, HyperLink, Content } from 'comps'
+import { Spinner, HyperLink, Content, Button } from 'comps'
 
 export const LinkDetailsContainer = () => {
   let { linkId } = useParams()

@@ -16,15 +16,14 @@ export const LoginContainer = () => {
   const [messages, setMessages] = useState([])
   const onUsernameChange = e => setUsername(e.target.value)
   const onPasswordChange = e => setPassword(e.target.value)
-  const tryLogin = () => {
+  const tryLogin = e => {
+    e.preventDefault()
     setMessages([])
     actions.login(username, password)
     api.auth
       .login(username, password)
-      .then(() => {
-        dispatch(actions.login())
-        history.push('/')
-      })
+      .then(() => actions.login()(dispatch))
+      .then(() => history.push('/'))
       .catch(e => {
         if (e.response.status === 400) {
           const msgs = Object.keys(e.response.data).map(
@@ -38,9 +37,10 @@ export const LoginContainer = () => {
         }
       })
   }
+
   return (
     <Content>
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={tryLogin}>
         <div>
           <Input
             type="text"
@@ -55,9 +55,7 @@ export const LoginContainer = () => {
             placeholder="Enter your password"
           />
         </div>
-        <Button type="submit" onClick={tryLogin}>
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
       {messages.map(m => (
         <MessageEl key={m}>{m}</MessageEl>

@@ -8,6 +8,10 @@ body {
   padding: 0;
 }
 
+textarea {
+  font-family: sans-serif;
+}
+
 header {
   background-color: #eee;
   height: 50px;

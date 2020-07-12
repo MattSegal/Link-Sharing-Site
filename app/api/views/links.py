@@ -24,6 +24,18 @@ class LinkViewSet(viewsets.ModelViewSet):
     serializer_class = LinkSerializer
     pagination_class = LinksPagination
 
+    def create(self, request, *args, **kwargs):
+        """Ensure user can only create links for themselves"""
+        if not request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        data = {**request.data, "user_id": request.user.id}
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
     def destroy(self, request, *args, **kwargs):
         """Soft delete links"""
         link = self.get_object()

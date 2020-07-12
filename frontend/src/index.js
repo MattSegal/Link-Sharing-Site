@@ -8,7 +8,7 @@ import { store } from 'state'
 import { Header, ScrollFooter } from 'comps'
 
 import {
-  // AddLinkModalContainer,
+  LinkCreateContainer,
   LoginContainer,
   LinkListContainer,
   LinkDetailsContainer,
@@ -17,7 +17,7 @@ import {
 } from 'containers'
 
 const ROUTES = [
-  // { path: '/add', comp: AddLinkModalContainer },
+  { path: '/add', comp: LinkCreateContainer },
   { path: '/bookmarks', comp: BookmarkListContainer },
   { path: '/login', comp: LoginContainer },
   { path: '/search', comp: SearchContainer },
