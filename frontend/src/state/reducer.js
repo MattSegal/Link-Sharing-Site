@@ -28,6 +28,10 @@ const reducers = {
       updating: false,
       items: mergeInLinks(links.items, action.links.results),
     })),
+  RECEIVE_USER: (state, action) => ({
+    ...state,
+    loggedInUser: action.user,
+  }),
   RECEIVE_PAGED_LINKS: (state, action) =>
     mapLinks(state, action, links => ({
       ...links,

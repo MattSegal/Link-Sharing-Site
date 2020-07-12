@@ -16,6 +16,15 @@ const handleHttpError = (actionName, error) => {
 }
 
 const actions = {
+  login: () => d => {
+    api.user
+      .get()
+      .then(r => r.data)
+      .then(user => d({ type: 'RECEIVE_USER', user: user }))
+      .catch(error => {
+        handleHttpError('Login', error)
+      })
+  },
   // Redux's store.dispatch is aliased to 'd' for brevity
   searchLinks: query => d => {
     d({ type: 'REQUEST_SEARCH' })

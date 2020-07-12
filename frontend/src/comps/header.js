@@ -17,7 +17,7 @@ import { Spinner } from './spinner'
 
 const TITLE_ROUTES = [
   { path: '/search', text: 'Search' },
-  { path: '/account', text: 'Account' },
+  { path: '/login', text: 'Login' },
   { path: '/bookmarks', text: 'Bookmarks' },
   { path: '/', text: 'Links' },
 ]
@@ -75,7 +75,7 @@ export const Header = () => {
           <Link title="Search" to="/search">
             <HeaderIcon Icon={FaSearch} />
           </Link>
-          <Link title="Account" to="/account">
+          <Link title="Login" to="/login">
             <HeaderIcon Icon={FaCog} />
           </Link>
         </GroupEl>

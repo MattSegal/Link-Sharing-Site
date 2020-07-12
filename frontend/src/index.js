@@ -9,7 +9,7 @@ import { Header, ScrollFooter } from 'comps'
 
 import {
   // AddLinkModalContainer,
-  // AccountContainer,
+  LoginContainer,
   LinkListContainer,
   LinkDetailsContainer,
   BookmarkListContainer,
@@ -17,9 +17,9 @@ import {
 } from 'containers'
 
 const ROUTES = [
-  { path: '/bookmarks', comp: BookmarkListContainer },
   // { path: '/add', comp: AddLinkModalContainer },
-  // { path: '/account', comp: AccountContainer },
+  { path: '/bookmarks', comp: BookmarkListContainer },
+  { path: '/login', comp: LoginContainer },
   { path: '/search', comp: SearchContainer },
   { path: '/link/:linkId', comp: LinkDetailsContainer },
   { path: '/', comp: LinkListContainer },

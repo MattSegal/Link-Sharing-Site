@@ -9,7 +9,7 @@ class LoggedInUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'bookmarks',)
+        fields = ("id", "username", "bookmarks")
 
     def get_bookmarks(self, obj):
         return list(LinkSerializer(obj.bookmarks, many=True).data)
@@ -19,16 +19,14 @@ class LinkSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     created = serializers.DateTimeField(read_only=True)
     user_id = serializers.IntegerField(write_only=True)
-    username = serializers.CharField(source='user.username', read_only=True)
+    username = serializers.CharField(source="user.username", read_only=True)
 
     class Meta:
         model = Link
-        fields = (
-            'id',
-            'user_id',
-            'username',
-            'title',
-            'url',
-            'created',
-            'description'
-        )
+        fields = ("id", "user_id", "username", "title", "url", "created", "description")
+
+
+class AuthSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=20)
+    password = serializers.CharField(max_length=30)
+
