@@ -45,7 +45,7 @@ export const Header = () => {
           </Switch>
         </GroupEl>
         <GroupEl>
-          <Route path="/(account|bookmarks|search)">
+          <Route path="/(account|bookmarks|search|add)">
             <Link title="Links" to="/">
               <HeaderIcon Icon={FaLink} />
             </Link>

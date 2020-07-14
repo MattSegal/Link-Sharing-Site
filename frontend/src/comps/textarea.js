@@ -6,6 +6,7 @@ export const Textarea = styled.textarea`
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   width: 100%;
+  box-sizing: border-box;
   max-width: 500px;
   border: 1px solid #ccc;
 `

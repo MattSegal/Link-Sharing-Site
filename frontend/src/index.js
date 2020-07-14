@@ -11,7 +11,6 @@ import {
   LinkCreateContainer,
   LoginContainer,
   LinkListContainer,
-  LinkDetailsContainer,
   BookmarkListContainer,
   SearchContainer,
 } from 'containers'
@@ -21,7 +20,6 @@ const ROUTES = [
   { path: '/bookmarks', comp: BookmarkListContainer },
   { path: '/login', comp: LoginContainer },
   { path: '/search', comp: SearchContainer },
-  { path: '/link/:linkId', comp: LinkDetailsContainer },
   { path: '/', comp: LinkListContainer },
 ]
 

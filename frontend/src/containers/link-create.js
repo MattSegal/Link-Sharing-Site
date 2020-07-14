@@ -7,6 +7,12 @@ import styled from 'styled-components'
 import { actions } from 'state'
 import { LinkForm, Content } from 'comps'
 
+const FORM_DEFAULTS = {
+  title: '',
+  url: '',
+  description: '',
+}
+
 export const LinkCreateContainer = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -17,7 +23,7 @@ export const LinkCreateContainer = () => {
   }
   return (
     <Content>
-      <LinkForm onSubmit={onSubmit} />
+      <LinkForm onSubmit={onSubmit} defaults={FORM_DEFAULTS} />
     </Content>
   )
 }

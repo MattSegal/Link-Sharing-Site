@@ -6,12 +6,17 @@ import styled from 'styled-components'
 type Props = {
   onSubmit: (string, string, string) => void,
   onCancel?: () => void,
+  defaults: {
+    title: string,
+    url: string,
+    description: string,
+  },
 }
 
-export const LinkForm = ({ onSubmit, onCancel }: Props) => {
-  const [title, setTitle] = useState('')
-  const [url, setUrl] = useState('')
-  const [description, setDescription] = useState('')
+export const LinkForm = ({ onSubmit, onCancel, defaults }: Props) => {
+  const [title, setTitle] = useState(defaults.title)
+  const [url, setUrl] = useState(defaults.url)
+  const [description, setDescription] = useState(defaults.description)
   const onTitleChange = e => setTitle(e.target.value)
   const onUrlChange = e => setUrl(e.target.value)
   const onDescChange = e => setDescription(e.target.value)
@@ -38,16 +43,23 @@ export const LinkForm = ({ onSubmit, onCancel }: Props) => {
         />
         <Textarea
           type="text"
-          rows="3"
+          rows="6"
           placeholder="Description (Optional)"
           value={description}
           onChange={onDescChange}
         />
       </div>
-      <Button disabled={!isSubmit} onClick={onFormSubmit}>
-        Submit
-      </Button>
-      {onCancel && <Button onClick={onCancel}>Cancel</Button>}
+      <ButtonBox>
+        <Button disabled={!isSubmit} onClick={onFormSubmit}>
+          Submit
+        </Button>
+        {onCancel && <Button onClick={onCancel}>Cancel</Button>}
+      </ButtonBox>
     </div>
   )
 }
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

@@ -1,8 +1,7 @@
 //@flow
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Waypoint } from 'react-waypoint'
-import { Link } from 'react-router-dom'
 import { MdEdit } from 'react-icons/md'
 import { FaEllipsisH } from 'react-icons/fa'
 import styled from 'styled-components'
@@ -11,8 +10,7 @@ import { actions } from 'state'
 import { NO_USER_SELECTED } from 'consts'
 import { Spinner, HyperLink, Content } from 'comps'
 
-const style = {}
-const linkStyle = {}
+import { LinkDetailsContainer } from './link-details'
 
 export const LinkListContainer = () => {
   const dispatch = useDispatch()
@@ -22,9 +20,7 @@ export const LinkListContainer = () => {
   return (
     <Content>
       {links.map(link => (
-        <HyperLink key={link.id} link={link}>
-          <LinkOptions link={link} user={user} />
-        </HyperLink>
+        <ListItem key={link.id} link={link} user={user} />
       ))}
       {next && (
         <SpinnerWrapperEl>
@@ -39,21 +35,27 @@ export const LinkListContainer = () => {
   )
 }
 
-const LinkOptions = ({ link, user }) => {
-  const hasViewOption = user || link.description
-  const hasEditOption = user && link.user === user.id
-  if (hasViewOption) {
-    return (
-      <Link to={`/link/${link.id}`} title="View" className="button">
-        <FaEllipsisH />
-      </Link>
-    )
-  } else if (hasEditOption) {
-    return (
-      <Link to={`/link/${link.id}`} title="Edit or View" className="button">
-        <MdEdit />
-      </Link>
-    )
+const ListItem = ({ link, user }) => {
+  const [isOpen, setOpen] = useState(false)
+  return (
+    <div key={link.id}>
+      <HyperLink key={link.id} link={link}>
+        <LinkOptions link={link} user={user} onClick={() => setOpen(o => !o)} />
+      </HyperLink>
+      {isOpen && (
+        <LinkDetailsContainer link={link} user={user} onClose={() => {}} />
+      )}
+    </div>
+  )
+}
+
+const LinkOptions = ({ link, user, onClick }) => {
+  const hasViewOption = link.description
+  const hasEditOption = user && link.username === user.username
+  if (hasEditOption) {
+    return <MdEdit onClick={onClick} />
+  } else if (hasViewOption) {
+    return <FaEllipsisH onClick={onClick} />
   } else {
     return null
   }
