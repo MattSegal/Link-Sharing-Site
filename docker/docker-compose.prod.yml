@@ -12,7 +12,7 @@ services:
       - PGDATABASE=links
       - PGUSER=$LINKS_DB_USER
       - PGPASSWORD=$LINKS_DB_PASSWORD
-      - PGHOST=$DOCKERHOST
+      - PGHOST=$HOST
       - PGPORT=5432
       # Pass-through
       - RAVEN_DSN=$LINKS_RAVEN_DSN
