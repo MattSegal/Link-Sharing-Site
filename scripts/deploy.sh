@@ -16,9 +16,8 @@ ssh root@$HOST /bin/bash << EOF
     yarn install
     yarn build
     popd
-    docker-compose -f docker/docker-compose.prod.yml build
-    echo "Pushing $REPO to local registry"
-    docker-compose push 
+    echo "Building Docker image for $REPO"
+    docker build -t links:latest -f docker/Dockerfile .
     echo "Deploying $REPO to docker swarm"
     docker stack deploy --compose-file docker/docker-compose.prod.yml $REPO
 EOF
