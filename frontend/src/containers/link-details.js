@@ -54,7 +54,7 @@ export const LinkDetailsContainer = ({ link, user, onClose }: Props) => {
 
 const DetailsBox = styled.div`
   box-sizing: border-box;
-  border: 1px solid #333;
+  border: 1px solid #ccc;
   padding: 1rem;
   margin-top: -1.5em;
   margin-bottom: 2em;
