@@ -30,6 +30,10 @@ RUN \
 # Mount the codebase
 ADD app /app
 
+ARG REDDIT_CLIENT_ID=reddit
+ARG REDDIT_CLIENT_SECRET=reddit
+ARG REDDIT_USERNAME=reddit
+ARG REDDIT_PASSWORD=reddit
 ARG DJANGO_SETTINGS_MODULE=links.settings.prod
 ARG DJANGO_SECRET_KEY=not-a-secret
 RUN mkdir -p /static/ && ./manage.py collectstatic --noinput

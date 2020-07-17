@@ -9,6 +9,7 @@ import {
   FaSyncAlt,
   FaCog,
   FaSearch,
+  FaRedditAlien,
 } from 'react-icons/fa'
 import styled from 'styled-components'
 
@@ -75,6 +76,15 @@ export const Header = () => {
           <Link title="Search" to="/search">
             <HeaderIcon Icon={FaSearch} />
           </Link>
+          <a
+            href="https://reddit.com/r/mattslinks"
+            title="Subreddit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <HeaderIcon Icon={FaRedditAlien} />
+          </a>
+
           <Link title="Login" to="/login">
             <HeaderIcon Icon={FaCog} />
           </Link>

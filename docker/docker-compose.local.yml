@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  # Postgres database
   database:
     image: postgres
     environment:
@@ -10,6 +11,7 @@ services:
     ports:
       - 25432:5432
 
+  # Django dev server
   web:
     image: links:latest
     command: ./manage.py runserver 0.0.0.0:8000
@@ -22,6 +24,7 @@ services:
       - ../app:/app
     links:
       - database
+      - worker
     environment:
       PGDATABASE: postgres
       PGUSER: postgres
@@ -29,6 +32,32 @@ services:
       PGHOST: database
       PGPORT: 5432
       DJANGO_SETTINGS_MODULE: links.settings.dev
+      # Read from .env
+      REDDIT_CLIENT_ID: $REDDIT_CLIENT_ID
+      REDDIT_CLIENT_SECRET: $REDDIT_CLIENT_SECRET
+      REDDIT_USERNAME: $REDDIT_USERNAME
+      REDDIT_PASSWORD: $REDDIT_PASSWORD
+
+  # Django-q worker.
+  worker:
+    image: links:latest
+    command: ./manage.py qcluster
+    volumes:
+      - ../app:/app
+    links:
+      - database
+    environment:
+      PGDATABASE: postgres
+      PGUSER: postgres
+      PGPASSWORD: password
+      PGHOST: database
+      PGPORT: 5432
+      DJANGO_SETTINGS_MODULE: links.settings.dev
+      # Read from .env
+      REDDIT_CLIENT_ID: $REDDIT_CLIENT_ID
+      REDDIT_CLIENT_SECRET: $REDDIT_CLIENT_SECRET
+      REDDIT_USERNAME: $REDDIT_USERNAME
+      REDDIT_PASSWORD: $REDDIT_PASSWORD
 
 volumes:
   postgres-data:

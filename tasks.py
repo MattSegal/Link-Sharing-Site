@@ -22,6 +22,11 @@ def debug(c):
 
 
 @task
+def logs(c):
+    c.run("docker-compose -f docker/docker-compose.local.yml logs --tail 100 -f worker", pty=True)
+
+
+@task
 def bash(c):
     """Get a bash shell in the docker container"""
     compose_run(c, "bash", pty=True)

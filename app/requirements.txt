@@ -12,6 +12,11 @@ djangorestframework
 # Static files
 whitenoise
 
+# Reddit integration
+django-q
+praw
+
+
 # Admin
 django-extensions
 ipython

@@ -1,5 +1,11 @@
 import os
 
+REDDIT_USER_AGENT = "Link poster for /r/mattslinks"
+REDDIT_CLIENT_ID = os.environ["REDDIT_CLIENT_ID"]
+REDDIT_CLIENT_SECRET = os.environ["REDDIT_CLIENT_SECRET"]
+REDDIT_USERNAME = os.environ["REDDIT_USERNAME"]
+REDDIT_PASSWORD = os.environ["REDDIT_PASSWORD"]
+
 BASE_DIR = "/app/"
 
 INSTALLED_APPS = [
@@ -15,6 +21,8 @@ INSTALLED_APPS = [
     "django_extensions",
     # API
     "rest_framework",
+    # Offline tasks
+    "django_q",
     # Links
     "api.apps.ApiConfig",
 ]
@@ -110,6 +118,9 @@ LOGGING = {
         },
     },
 }
+
+# Django Q
+Q_CLUSTER = {"name": "links", "orm": "default"}
 
 SHELL_PLUS = "ipython"
 LINK_PAGE_SIZE = 40
