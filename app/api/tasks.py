@@ -20,6 +20,7 @@ def _sync_link(link_id: str, subreddit=None):
     https://praw.readthedocs.io/en/latest/code_overview/models/subreddit.html#praw.models.Subreddit.submit
     """
     if not subreddit:
+        log.info("No subreddit suppied, creating a new one.")
         subreddit = get_subreddit()
 
     link = Link.objects.get(id=link_id)
