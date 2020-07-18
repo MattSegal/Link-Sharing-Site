@@ -32,10 +32,9 @@ def _sync_link(link_id: str, subreddit=None):
     results = [r for r in subreddit.search(f"title:{link.title}")]
     time.sleep(2)
     if results:
-        result = results[0]
-        log.info("Found %s results, using %s", len(results), result)
-        link.reddit_id = result.id
-        link.save()
+        submission = results[0]
+        log.info("Found %s results, using %s", len(results), submission)
+        Link.objects.filter(id=link.id).update(reddit_id=submission.id)
         return
 
     log.info("Did not find any matching results.")
@@ -48,8 +47,7 @@ def _sync_link(link_id: str, subreddit=None):
 
     log.info("%s %s %s", link.title, link.url, flair_id)
     submission = subreddit.submit(link.title, url=link.url, flair_id=flair_id)
-    link.reddit_id = submission.id
-    link.save()
+    Link.objects.filter(id=link.id).update(reddit_id=submission.id)
     time.sleep(2)
 
 
