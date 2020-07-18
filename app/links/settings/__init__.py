@@ -120,7 +120,7 @@ LOGGING = {
 }
 
 # Django Q
-Q_CLUSTER = {"name": "links", "orm": "default"}
+Q_CLUSTER = {"name": "links", "orm": "default", "workers": 1}
 
 SHELL_PLUS = "ipython"
 LINK_PAGE_SIZE = 40
