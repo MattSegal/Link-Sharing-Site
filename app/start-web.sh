@@ -7,6 +7,7 @@ mkdir -p /var/log/gunicorn
 echo "Starting gunicorn"
 gunicorn links.wsgi:application \
   --name links \
+  --preload \
   --workers 1 \
   --threads 2 \
   --bind 0.0.0.0:8001 \
