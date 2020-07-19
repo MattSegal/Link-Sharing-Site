@@ -7,39 +7,43 @@ services:
     entrypoint: /app/start-web.sh
     ports:
       - 8001:8001
+    volumes:
+      - /var/run/postgresql:/app/postgres.sock
     environment:
-      - DJANGO_SETTINGS_MODULE=links.settings.prod
+      DJANGO_SETTINGS_MODULE: links.settings.prod
       # Postgres
-      - PGDATABASE=links
-      - PGUSER=$LINKS_DB_USER
-      - PGPASSWORD=$LINKS_DB_PASSWORD
-      - PGHOST=$HOST
-      - PGPORT=5432
+      PGDATABASE: links
+      PGUSER: $LINKS_DB_USER
+      PGPASSWORD: $LINKS_DB_PASSWORD
+      PGHOST: /app/postgres.sock
+      PGPORT: 5432
       # Pass-through
-      - RAVEN_DSN=$LINKS_RAVEN_DSN
-      - DJANGO_SECRET_KEY
+      RAVEN_DSN: $LINKS_RAVEN_DSN
+      DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
       # Read from .env
-      - REDDIT_CLIENT_ID=$LINKS_REDDIT_CLIENT_ID
-      - REDDIT_CLIENT_SECRET=$LINKS_REDDIT_CLIENT_SECRET
-      - REDDIT_USERNAME=$LINKS_REDDIT_USERNAME
-      - REDDIT_PASSWORD=$LINKS_REDDIT_PASSWORD
+      REDDIT_CLIENT_ID: $LINKS_REDDIT_CLIENT_ID
+      REDDIT_CLIENT_SECRET: $LINKS_REDDIT_CLIENT_SECRET
+      REDDIT_USERNAME: $LINKS_REDDIT_USERNAME
+      REDDIT_PASSWORD: $LINKS_REDDIT_PASSWORD
   # Django-q worker.
   worker:
     image: links:latest
     command: ./manage.py qcluster
+    volumes:
+      - /var/run/postgresql:/app/postgres.sock
     environment:
-      - DJANGO_SETTINGS_MODULE=links.settings.prod
+      DJANGO_SETTINGS_MODULE: links.settings.prod
       # Postgres
-      - PGDATABASE=links
-      - PGUSER=$LINKS_DB_USER
-      - PGPASSWORD=$LINKS_DB_PASSWORD
-      - PGHOST=$HOST
-      - PGPORT=5432
+      PGDATABASE: links
+      PGUSER: $LINKS_DB_USER
+      PGPASSWORD: $LINKS_DB_PASSWORD
+      PGHOST: /app/postgres.sock
+      PGPORT: 5432
       # Pass-through
-      - RAVEN_DSN=$LINKS_RAVEN_DSN
-      - DJANGO_SECRET_KEY
+      RAVEN_DSN: $LINKS_RAVEN_DSN
+      DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
       # Read from .env
-      - REDDIT_CLIENT_ID=$LINKS_REDDIT_CLIENT_ID
-      - REDDIT_CLIENT_SECRET=$LINKS_REDDIT_CLIENT_SECRET
-      - REDDIT_USERNAME=$LINKS_REDDIT_USERNAME
-      - REDDIT_PASSWORD=$LINKS_REDDIT_PASSWORD
+      REDDIT_CLIENT_ID: $LINKS_REDDIT_CLIENT_ID
+      REDDIT_CLIENT_SECRET: $LINKS_REDDIT_CLIENT_SECRET
+      REDDIT_USERNAME: $LINKS_REDDIT_USERNAME
+      REDDIT_PASSWORD: $LINKS_REDDIT_PASSWORD
