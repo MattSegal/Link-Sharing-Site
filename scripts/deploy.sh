@@ -18,7 +18,8 @@ ssh root@$HOST /bin/bash << EOF
     popd
     export HOST="$HOST"
     echo "Building Docker image for $REPO"
-    docker build -t links:latest -f docker/Dockerfile .
+    docker build -t $REPO:latest -f docker/Dockerfile .
     echo "Deploying $REPO to docker swarm"
+    docker stack rm $REPO
     docker stack deploy --compose-file docker/docker-compose.prod.yml $REPO
 EOF
