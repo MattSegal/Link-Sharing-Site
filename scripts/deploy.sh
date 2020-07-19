@@ -20,6 +20,5 @@ ssh root@$HOST /bin/bash << EOF
     echo "Building Docker image for $REPO"
     docker build -t $REPO:latest -f docker/Dockerfile .
     echo "Deploying $REPO to docker swarm"
-    docker stack rm $REPO
     docker stack deploy --compose-file docker/docker-compose.prod.yml $REPO
 EOF
